@@ -6,7 +6,7 @@
 /*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:13:17 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/09 04:50:45 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/09 06:03:16 by exostiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	cmd_echo(char **spli)
 	if (echo_option(spli[1]) == 1)
 		printf("\n");
 	free_spli(spli);
-	fix_out_inr_redir();
 }
 
 int	echo_option(char *spli)
@@ -88,7 +87,6 @@ void	cmd_cd(char **spli)
 	if (spli[1])
 		free_spli(unparun);
 	free_spli(spli);
-	fix_out_inr_redir();
 }
 
 char	**cmd_cd_dot(void)

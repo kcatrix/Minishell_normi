@@ -6,7 +6,7 @@
 /*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/09/09 04:53:57 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/09 06:03:01 by exostiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ char	**cmd_unset(char **spli, char **env)
 		return (env);
 	tmp = ft_cp_env(env);
 	cmd_unset2(spli, tmp, env, i);
-	fix_out_inr_redir();
 	return (env);
 }
 
@@ -110,17 +109,20 @@ int	ft_redirect(char **spli)
 			return (0);
 		g_stock.cpenv = cmd_unset(spli, g_stock.cpenv);
 		g_stock.cpexp = cmd_unset(spli, g_stock.cpexp);
+		fix_out_inr_redir();
 		free_spli(spli);
 		return (0);
 	}
 	else if (ft_strcmp(spli[0], "echo") == 0)
 	{
 		cmd_echo(spli);
+		fix_out_inr_redir();
 		return (0);
 	}
 	else if (ft_strcmp(spli[0], "cd") == 0)
 	{
 		cmd_cd(spli);
+		fix_out_inr_redir();
 		return (0);
 	}
 	if (ft_redirect_2(spli) == 0)
