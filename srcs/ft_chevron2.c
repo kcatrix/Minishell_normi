@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_chevron2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:03:11 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/05 15:00:08 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/09/12 06:21:59 by exostiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	ft_prepchevgauche(char **spli, int i)
 {
 	int	file;
 
-	file = open(spli[i + 1], O_WRONLY, 0777);
+	file = open(spli[i + 1], O_RDONLY, 0777);
 	if (file < 0)
 	{
 		g_stock.chkcrash = -1;

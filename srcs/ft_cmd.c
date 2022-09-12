@@ -6,7 +6,7 @@
 /*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/09/09 06:03:01 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/12 05:58:51 by exostiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,20 +109,17 @@ int	ft_redirect(char **spli)
 			return (0);
 		g_stock.cpenv = cmd_unset(spli, g_stock.cpenv);
 		g_stock.cpexp = cmd_unset(spli, g_stock.cpexp);
-		fix_out_inr_redir();
 		free_spli(spli);
 		return (0);
 	}
 	else if (ft_strcmp(spli[0], "echo") == 0)
 	{
 		cmd_echo(spli);
-		fix_out_inr_redir();
 		return (0);
 	}
 	else if (ft_strcmp(spli[0], "cd") == 0)
 	{
 		cmd_cd(spli);
-		fix_out_inr_redir();
 		return (0);
 	}
 	if (ft_redirect_2(spli) == 0)
@@ -149,7 +146,7 @@ int	ft_cmd(char *line, char **env)
 	spli = parse(spli);
 	if (spli[0] == NULL)
 		return (0);
-	ft_verif_chevron(spli);
+	ft_verif_chevron(spli); //  in et out potentiellement modifié
 	if (ft_parse_cmd(spli, path) == 0) 
 		return (0);
 	i = verif_exist(path, spli[0]);

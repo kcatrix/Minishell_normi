@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 13:57:59 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/09 04:56:55 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/12 15:17:41 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,9 @@ char	**ft_sup_dollar_boucle(char **spli, char **spli2, int y, int i);
 int		ft_path_exist_boucle(char **path, int i, int x);
 char 	**cmd_dollar_int(char **spli, int i);
 void	fix_out_inr_redir(void);
+void	ft_verif_pipe(char **spli);
+int		ft_strlen_pipe(char **spli);
+void	set_signal(int is_printed);
 typedef struct s_stock
 {
 	char	**cpenv;
@@ -125,6 +128,7 @@ typedef struct s_stock
 	int		chkcrash;
 	int		old;
 	int		end;
+	int		fork;
 }	t_stock;
 
 t_stock	g_stock;

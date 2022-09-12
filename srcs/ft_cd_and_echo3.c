@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_and_echo3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 16:03:28 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/09 13:02:07 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/09/12 02:15:18 by exostiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	cmd_cd_dot_dot(void)
 	int	i;
 
 	i = 0;
-	printf("just la\n");
 	if (chdir("..") == -1)
 		return ;
 	while (g_stock.cpenv[i])

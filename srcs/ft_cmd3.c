@@ -6,7 +6,7 @@
 /*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:48:32 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/09 04:36:51 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/12 06:10:59 by exostiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@ void	ft_exec(char **spli, char **path, char **env, int i)
 	else
 	{
 		waitpid(id, 0, 0);
+		if (g_stock.out > 1)
+			close(g_stock.out);
+		if (g_stock.in > 0)
+			close(g_stock.in);
 		free_spli(path);
 		free_spli(spli);
 	}
-	if (g_stock.out > 1)
-		close(g_stock.out);
-	if (g_stock.in > 0)
-		close(g_stock.in);
 }
 
 void	init_var_cmd(void)
@@ -99,8 +99,6 @@ void	init_var_cmd(void)
 
 int	ft_parse_cmd(char **spli, char **path)
 {
-	dup2(g_stock.out, STDOUT_FILENO);
-	dup2(g_stock.in, STDIN_FILENO);
 	if (g_stock.chkcrash < 0)
 	{
 		g_stock.out = 1;

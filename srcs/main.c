@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:50 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/09/09 04:32:13 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/12 15:24:40 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int ac, char **av, char **env)
 	id = 0;
 	g_stock.cpenv = ft_cp_env(env);
 	verif_export_exist(i);
+	set_signal(0);
 	while (1)
 	{
 		line = readline("minishell >");
