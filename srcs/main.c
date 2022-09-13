@@ -6,7 +6,7 @@
 /*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:50 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/09/12 15:24:40 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/09/13 15:39:09 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,21 @@ int	main(int ac, char **av, char **env)
 	g_stock.cpenv = ft_cp_env(env);
 	verif_export_exist(i);
 	set_signal(0);
+	g_stock.nbpip = 0;
+	g_stock.nbpassage = 0;
 	while (1)
 	{
-		line = readline("minishell >");
-		add_history(line);
+		if ((g_stock.nbpassage == 0) && (g_stock.nbpip == 0))
+		{
+			line = readline("minishell >");
+			add_history(line);
+		}
 		ft_cmd(line, env);
+		if ((g_stock.nbpassage) == g_stock.nbpip + 1)
+		{
+			g_stock.nbpassage = 0;
+			g_stock.nbpip = 0;
+		}
 	}
 	free(line);
 }

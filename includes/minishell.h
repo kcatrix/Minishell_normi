@@ -6,7 +6,7 @@
 /*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 13:57:59 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/12 15:17:41 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/09/13 15:08:36 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	**ft_mallocexportadd(void);
 int		ft_redirect_2(char **spli);
 char	**cmd_unset2(char **spli, char **tmp, char **env, int i);
 void	ft_exec(char **spli, char **path, char **env, int i);
-void	init_var_cmd(void);
+void	init_var_cmd(char *line);
 int		ft_parse_cmd(char **spli, char **path);
 int		last_check(int i, char **path, char *line);
 char	*ft_first_tri(char *str, int i);
@@ -116,6 +116,8 @@ void	fix_out_inr_redir(void);
 void	ft_verif_pipe(char **spli);
 int		ft_strlen_pipe(char **spli);
 void	set_signal(int is_printed);
+void	spli_pipe(char *line);
+int		strlen_pipe(char *line);
 typedef struct s_stock
 {
 	char	**cpenv;
@@ -129,6 +131,9 @@ typedef struct s_stock
 	int		old;
 	int		end;
 	int		fork;
+	int		nbpassage;
+	int		nbpip;
+	char	**line2;
 }	t_stock;
 
 t_stock	g_stock;

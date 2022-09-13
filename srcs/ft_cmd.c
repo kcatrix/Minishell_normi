@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/09/12 05:58:51 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/13 15:18:46 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,13 +137,14 @@ int	ft_cmd(char *line, char **env)
 	int		i;
 
 	i = 0;
-	init_var_cmd();
+	init_var_cmd(line);
 	if (verif_space(line) == 0 || line[0] == 0)
 		return (0);
 	del_quote(line);
 	path = path_fct(g_stock.cpenv);
 	spli = ft_split(line, ' ');
 	spli = parse(spli);
+	g_stock.nbpassage++;
 	if (spli[0] == NULL)
 		return (0);
 	ft_verif_chevron(spli); //  in et out potentiellement modifié

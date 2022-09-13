@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:48:32 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/12 06:10:59 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/13 14:49:16 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,12 @@ void	ft_exec(char **spli, char **path, char **env, int i)
 	}
 }
 
-void	init_var_cmd(void)
+void	init_var_cmd(char *line)
 {
 	g_stock.chkcrash = 0;
 	g_stock.in = 0;
 	g_stock.out = 1;
+	g_stock.nbpip = strlen_pipe(line);
 }
 
 int	ft_parse_cmd(char **spli, char **path)
