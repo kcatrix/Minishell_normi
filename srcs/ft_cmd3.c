@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:48:32 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/13 14:49:16 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/09/21 12:35:57 by exostiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,17 @@ int	ft_redirect_2(char **spli)
 	if (ft_strcmp(spli[0], "PWD") == 0 || ft_strcmp(spli[0], "pwd") == 0)
 	{
 		ft_pwd();
-		free_spli(spli);
 		return (0);
 	}
 	else if ((ft_strcmp(spli[0], "env") == 0
 			|| ft_strcmp(spli[0], "ENV") == 0) && ft_path_exist() == 0)
 	{
 		ft_env();
-		free_spli(spli);
 		return (0);
 	}
 	else if (ft_strcmp(spli[0], "export") == 0)
 	{
 		ft_export(spli);
-		free_spli(spli);
 		return (0);
 	}
 	else if (ft_strcmp(spli[0], "exit") == 0)
@@ -53,34 +50,36 @@ char	**cmd_unset2(char **spli, char **tmp, char **env, int i)
 			{
 				free(env[i]);
 				env[i] = ft_mallocex(tmp[i + 1], env[i]);
-				free(tmp[i + 1]);
 				i++;
 			}
+			free(env[i]);
 			env[i] = NULL;
 			return (env);
 		}
+		free(env[i]);
 		env[i] = ft_mallocex(tmp[i], env[i]);
-		free(tmp[i]);
 		i++;
 	}
-	free(tmp);
 	return (env);
 }
 
 void	ft_exec(char **spli, char **path, char **env, int i)
 {
 	int	id;
+	int	in;
 
+	g_stock.i = i;
+	in = g_stock.pip[0];
+	pipe(g_stock.pip);
 	id = fork();
 	if (id == 0)
 	{
-		dup2(g_stock.out, STDOUT_FILENO);
-		dup2(g_stock.in, STDIN_FILENO);
-		execve(path[i], spli, env);
+		child_process(path, spli, env, in);
 	}
 	else
 	{
 		waitpid(id, 0, 0);
+		close(g_stock.pip[1]);
 		if (g_stock.out > 1)
 			close(g_stock.out);
 		if (g_stock.in > 0)
@@ -92,10 +91,42 @@ void	ft_exec(char **spli, char **path, char **env, int i)
 
 void	init_var_cmd(char *line)
 {
+	int i;
+	int	y;
+
+	y = 0;
+	i = 0;
 	g_stock.chkcrash = 0;
 	g_stock.in = 0;
 	g_stock.out = 1;
-	g_stock.nbpip = strlen_pipe(line);
+	g_stock.chks = 0;
+	g_stock.line2 = ft_split_pipe(line, '|');
+	if(g_stock.chkpospip)
+		free(g_stock.chkpospip);
+}
+
+char	*ft_replace_absolute(char **spli) //fix path absolu
+{
+	int 	x;
+	int		y;
+	int		i;
+	char	*tmp;
+
+	tmp = NULL;
+	
+	i = 0;
+	y = 0;
+	x = access(spli[0], R_OK);
+	if(x == 0)
+	{
+		while(spli[0][i])
+			i++;
+		while(spli[0][i--] != '/')
+			y++;
+		tmp = ft_mallocex(spli[0] + i + 2, tmp);
+		free(spli[0]);
+	}
+	return(tmp);
 }
 
 int	ft_parse_cmd(char **spli, char **path)

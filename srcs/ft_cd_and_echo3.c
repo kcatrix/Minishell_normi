@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_and_echo3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 16:03:28 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/12 02:15:18 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/15 16:30:51 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	cmd_cd_dot_dot(void)
 	{
 		if (ft_memcmp(g_stock.cpenv[i], "OLDPWD=", 7) == 0 && g_stock.old == 0)
 		{
+			free(g_stock.cpenv[i]);
 			g_stock.cpenv[i] = "OLDPWD=";
 			g_stock.cpenv[i] = ft_strjoin(g_stock.cpenv[i], getpwd());
 		}
@@ -71,6 +72,7 @@ void	cmd_cd_absolute_redirect(char *spli)
 
 void	cmd_cd_absolute(char *spli)
 {
+	if (chdir(spli) == -1)
 	{
 		printf("cd: %s: No such file or directory\n", spli);
 		return ;

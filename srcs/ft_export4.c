@@ -3,41 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export4.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:21:16 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/05 15:20:28 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/09/19 08:14:35 by exostiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_verifenv(char *spli)
+int	ft_verifenv(char *spli) //fonction modifee
 {
-	int	i;
+	char	*prespli;
+	char	*preenv;
+	char	*preexp;
+	int		i;
 
+	prespli = ft_preline(spli);
 	i = 0;
 	while (g_stock.cpenv[i])
 	{
-		if (ft_strcmp(ft_preline(spli), ft_preline(g_stock.cpenv[i])) == 0)
+		preenv = ft_preline(g_stock.cpenv[i]);
+		if (ft_strcmp(prespli, preenv) == 0)//preline à fix
 		{
 			free(g_stock.cpenv[i]);
 			g_stock.cpenv[i] = ft_mallocex(spli, g_stock.cpenv[i]);
 			i = 0;
 			while (g_stock.cpexp[i])
 			{
-				if (ft_strcmp(ft_preline(spli),
-						ft_preline(g_stock.cpexp[i])) == 0)
+				preexp = ft_preline(g_stock.cpexp[i]);
+				if (ft_strcmp(prespli, preexp) == 0 && ft_verifspli(spli) != 0)
 				{
 					free(g_stock.cpexp[i]);
 					g_stock.cpexp[i] = ft_mallocex(spli, g_stock.cpexp[i]);
 				}
+				free(preexp);
 				i++;
 			}
+			free(preenv);
+			free(prespli);
 			return (1);
 		}
+		free(preenv);
 		i++;
 	}
+	free(prespli);
 	return (0);
 }
 
@@ -90,6 +100,7 @@ char	**ft_mallocexportadd(void)
 		i++;
 	cpcpenv = malloc(sizeof(char *) * (i + 1));
 	i = 0;
+	printf("1bis\n");
 	cpcpenv = ft_mallocexportadd_boucle(cpcpenv, i, y);
 	return (cpcpenv);
 }
@@ -106,7 +117,7 @@ char	**ft_mallocexportadd_boucle(char **cpcpenv, int i, int y)
 		}
 		cpcpenv[i][y] = '\0';
 		y = 0;
-		free(g_stock.cpexp[i]);
+		free_protect(g_stock.cpexp[i]);
 		i++;
 	}
 	cpcpenv[i] = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
+/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:26:09 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/07 15:05:06 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/09/20 06:13:37 by exostiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 char	**parse(char **spli)
 {
 	int	i;
-
+	
 	i = 0;
+	if(spli[0][0] == '/')
+		spli[0] = ft_replace_absolute(spli);
 	while (ft_checkdollar(spli) == 1)
 	{
 		while (spli[i])

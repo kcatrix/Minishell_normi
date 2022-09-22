@@ -6,7 +6,7 @@
 /*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 10:56:15 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/05 11:02:10 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/09/16 15:47:18 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,16 @@ int	verif_exist(char **path, char *argv)
 {
 	int		i;
 	int		x;
+	char	*tmp;
 
 	i = -1;
 	x = 1;
 	while (path[++i])
 	{
-		path[i] = ft_strjoin(path[i], argv);
+		tmp = ft_mallocex(path[i], tmp);
+		free(path[i]);
+		path[i] = ft_strjoin(tmp, argv);
+		free(tmp);
 		x = access(path[i], R_OK);
 		if (x == 0)
 			return (i);
@@ -80,13 +84,23 @@ int	ft_strlendouble(char **strdouble)
 
 int	ft_verifexistunset(char **env, char **spli)
 {
-	int	i;
-
+	int		i;
+	char	*preenv;
+	char	*prespli;
+	
 	i = 0;
 	while (env[i])
 	{
-		if (ft_strcmp(ft_preline(env[i]), ft_preline(spli[1])) == 0)
+		preenv = ft_preline(env[i]);
+		prespli = ft_preline(spli[1]);
+		if (ft_strcmp(preenv, prespli) == 0)
+		{
+			free(preenv);
+			free(prespli);
 			return (0);
+		}
+		free(preenv);
+		free(prespli);
 		i++;
 	}
 	return (1);

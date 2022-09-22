@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:17:04 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/05 11:19:31 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/09/19 08:36:47 by exostiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,25 @@ char	*ft_preline(char *line)
 	return (line2);
 }
 
-int	veriflen(char **spli, int i)
+int	veriflen(char **spli, int i) //fonction modifee
 {
-	if (ft_strlen(spli[1]) > ft_strlen(ft_preline(g_stock.cpenv[i])))
+	char	*preenv;
+	int		lenght;
+	
+	preenv = ft_preline(g_stock.cpenv[i]);
+	lenght = 0;
+	if (ft_strlen(spli[1]) > ft_strlen(preenv))
 		return (ft_strlen(spli[1]));
 	else
-		return (ft_strlen(ft_preline(g_stock.cpenv[i])));
+	{
+		lenght = ft_strlen(preenv);
+		if(preenv)
+			free(preenv);
+		return (lenght);
+	}
 }
 
-int	ft_parseexport(char *spli)
+int	ft_parseexport(char *spli)//fonction modifiee
 {
 	int		i;
 	char	*line;
@@ -58,15 +68,22 @@ int	ft_parseexport(char *spli)
 	while ((i >= 0 && ft_isdigit(line[i]) == 1) || (i >= 0 && line[i] == '_'))
 		i--;
 	if (i == -1)
+	{
+		free(line);
 		return (1);
+	}
 	while ((i >= 0 && ft_isalpha(line[i]) == 1) || (i >= 0 && line[i] == '_'))
 		i--;
 	if (i == -1)
+	{
+		free(line);
 		return (0);
+	}
+	free(line);
 	return (1);
 }
 
-char	**ft_exportaff(char *line, char **newline)
+char	**ft_exportaff(char *line, char **newline) //trouver une autre solution de fix pour l'affichage lors de l'entrée d'une variable vide avec = " ex: exokerogk="" "
 {
 	int	i;
 
@@ -84,9 +101,17 @@ char	**ft_exportaff(char *line, char **newline)
 				newline[0][i] = line[i - 1];
 				i++;
 			}
-			newline[0][i] = line[i - 1];
-			newline[0][++i] = '"';
-			newline[0][++i] = '\0';
+			if(line[i] || line[i - 1])
+			{
+				newline[0][i] = line[i - 1];
+				newline[0][++i] = '"';
+			    newline[0][++i] = '\0';
+			}
+			else
+			{
+				newline[0][i++] = '"';
+				newline[0][i] = '\0';
+			}
 			return (newline);
 		}
 		i++;

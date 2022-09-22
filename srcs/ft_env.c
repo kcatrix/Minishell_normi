@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
+/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:14:19 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/01 15:14:39 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/09/22 02:57:15 by exostiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,24 @@ int	verifline(char *line)
 void	ft_env(void)
 {
 	int	i;
+	int	id;
+	int	in;
 
 	i = 0;
-	while (g_stock.cpenv[i])
+	pipe(g_stock.pip); //fix en mettant 2 cas, si pipes présents et si non pipes
+	in = g_stock.pip[0];
+	id = fork();
+	if (id == 0)
 	{
-		if (verifline(g_stock.cpenv[i]) == 0)
-			printf("%s\n", g_stock.cpenv[i]);
-		i++;
+		ft_pipe2(in);
+		while (g_stock.cpenv[i])
+		{
+			if (verifline(g_stock.cpenv[i]) == 0)
+				printf("%s\n", g_stock.cpenv[i]);
+			i++;
+		}
+		exit(0);
 	}
+	else
+		fixwait(id);
 }

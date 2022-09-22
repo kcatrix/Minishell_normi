@@ -3,48 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/09/13 15:18:46 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/09/21 07:50:04 by exostiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-/*
-
-pipe gerer les quotes correctement, gerer les pipes chelous
-
-env affiche pas les variables vides et export oui
- 
-EXPORT ; La commande export marque une variable d'environnement à exporter 
-avec tout processus enfant nouvellement créé et permet ainsi à un processus 
-enfant d'hériter de toutes les variables marquées.
-*/
-/*char	**ft_verifparam(char *env, t_stock *env2)
-{
-	int	i;
-
-	i = 0;
-	while(env[i])
-	{
-		
-	}
-}*/
-/*char	*ft_suppr(char *tmp, char *spli)
-{
-	int	i;
-
-	i = 0;
-	while (tmp[i] == spli[i])
-	{
-		i++;
-	}
-	tmp[i] = '\0';
-	printf("tmp == %s\n", tmp);
-	return (tmp);
-}*/
 
 void	free_spli(char **spli)
 {
@@ -82,11 +48,9 @@ char	**ft_cp_env(char **env)
 		tmp[i][j] = '\0';
 		i++;
 	}
+	tmp[i] = NULL;
 	return (tmp);
 }
-
-// securitee a rajouter pour verifier l existence du parametre au sein de l env
-// stocker les differents parametre dans un tableau
 
 char	**cmd_unset(char **spli, char **env)
 {
@@ -98,6 +62,7 @@ char	**cmd_unset(char **spli, char **env)
 		return (env);
 	tmp = ft_cp_env(env);
 	cmd_unset2(spli, tmp, env, i);
+	free_spli(tmp);
 	return (env);
 }
 
@@ -109,7 +74,6 @@ int	ft_redirect(char **spli)
 			return (0);
 		g_stock.cpenv = cmd_unset(spli, g_stock.cpenv);
 		g_stock.cpexp = cmd_unset(spli, g_stock.cpexp);
-		free_spli(spli);
 		return (0);
 	}
 	else if (ft_strcmp(spli[0], "echo") == 0)
@@ -138,20 +102,27 @@ int	ft_cmd(char *line, char **env)
 
 	i = 0;
 	init_var_cmd(line);
-	if (verif_space(line) == 0 || line[0] == 0)
+	if (!line || !ft_strlen(line))
+		return(0);
+	if (verif_space(g_stock.line2[g_stock.nbpassage]) 
+		== 0 || g_stock.line2[g_stock.nbpassage] == 0)
 		return (0);
-	del_quote(line);
+	del_quote(g_stock.line2[g_stock.nbpassage]);
 	path = path_fct(g_stock.cpenv);
-	spli = ft_split(line, ' ');
+	spli = ft_split(g_stock.line2[g_stock.nbpassage], ' '); //verif test pipe redirection
 	spli = parse(spli);
 	g_stock.nbpassage++;
 	if (spli[0] == NULL)
 		return (0);
-	ft_verif_chevron(spli); //  in et out potentiellement modifié
-	if (ft_parse_cmd(spli, path) == 0) 
+	ft_verif_chevron(spli);
+	if (ft_parse_cmd(spli, path) == 0)
+	{
+		if(spli)
+			free_spli(spli);
 		return (0);
+	}
 	i = verif_exist(path, spli[0]);
-	if (last_check(i, path, spli[0]) == -1)
+	if (last_check(i, path, spli[0], spli) == -1)
 		return (-1);
 	ft_exec(spli, path, env, i);
 	g_stock.end = 0;

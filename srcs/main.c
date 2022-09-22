@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:50 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/09/13 15:39:09 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/09/21 12:53:33 by exostiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,10 @@ int	supp_env(char **env)
 int	main(int ac, char **av, char **env)
 {
 	char	*line;
-	int		id;
-	int		i;
 
 	ac = 0;
-	i = 0;
 	av = NULL;
-	id = 0;
-	g_stock.cpenv = ft_cp_env(env);
-	verif_export_exist(i);
-	set_signal(0);
-	g_stock.nbpip = 0;
-	g_stock.nbpassage = 0;
+	prechauffage(env);
 	while (1)
 	{
 		if ((g_stock.nbpassage == 0) && (g_stock.nbpip == 0))
@@ -54,33 +46,31 @@ int	main(int ac, char **av, char **env)
 			line = readline("minishell >");
 			add_history(line);
 		}
-		ft_cmd(line, env);
+		ft_cmd (line, env);
 		if ((g_stock.nbpassage) == g_stock.nbpip + 1)
 		{
+			free_spli(g_stock.line2);
+			free(line);
 			g_stock.nbpassage = 0;
 			g_stock.nbpip = 0;
 		}
+		else
+			free_spli(g_stock.line2);
 	}
 	free(line);
 }
 
-void	verif_export_exist(int i)
+void	prechauffage(char **env)
 {
-	if (!g_stock.cpexp)
-	{
-		while (g_stock.cpenv[i])
-			i++;
-		g_stock.cpexp = malloc(sizeof(char *) * (i + 1));
-		i = 0;
-		while (g_stock.cpenv[i])
-		{
-			ft_triexport(g_stock.cpenv[i]);
-			i++;
-		}
-		signal(SIGINT, interrupt_signal);
-		signal(SIGQUIT, quit_signal);
-		signal(11, quit_signal);
-	}
+	int	i;
+
+	i = 0;
+	g_stock.cpenv = ft_cp_env(env);
+	verif_export_exist(i);
+	set_signal(0);
+	g_stock.nbpip = 0;
+	g_stock.fork = 0;
+	g_stock.nbpassage = 0;
 }
 
 int	is_num(char *str)

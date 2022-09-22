@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 13:57:59 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/13 15:08:36 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/09/22 02:56:17 by exostiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int		ft_chevron_redirect2(char **spli, int i);
 int		ft_prepchevgauche(char **spli, int i);
 int		ft_verifexistunset(char **env, char **spli);
 int		ft_verifdoublon(char *spli);
+int		ft_verifspli(char *spli);
 void	ft_exptoenv(char *spli);
 char	**ft_exptoenv2(void);
 void	ft_export_noarg(void);
@@ -98,7 +99,7 @@ char	**cmd_unset2(char **spli, char **tmp, char **env, int i);
 void	ft_exec(char **spli, char **path, char **env, int i);
 void	init_var_cmd(char *line);
 int		ft_parse_cmd(char **spli, char **path);
-int		last_check(int i, char **path, char *line);
+int		last_check(int i, char **path, char *line, char **spli);
 char	*ft_first_tri(char *str, int i);
 int		verif_ex_exist(void);
 char	**ft_exptoenv2_boucle(char **cpcpenv, int i, int y);
@@ -111,13 +112,29 @@ int		ft_chevron_redirect_boucle(char **spli, int i, int y);
 void	verif_export_exist(int i);
 char	**ft_sup_dollar_boucle(char **spli, char **spli2, int y, int i);
 int		ft_path_exist_boucle(char **path, int i, int x);
-char 	**cmd_dollar_int(char **spli, int i);
+int		ft_path_exist_boucle_end(char **path, int i, int x, char *tmp);
+char	**cmd_dollar_int(char **spli, int i);
 void	fix_out_inr_redir(void);
 void	ft_verif_pipe(char **spli);
 int		ft_strlen_pipe(char **spli);
 void	set_signal(int is_printed);
 void	spli_pipe(char *line);
 int		strlen_pipe(char *line);
+void	cmd_cd_boucle(char **unparun);
+void	ft_pipe(void);
+void	child_process(char **path, char **spli, char **env, int in);
+void	main_boucle(char *line, char **env);
+void	pwd_clean(char *spli);
+void	prechauffage(char **env);
+void	free_protect(char *str);
+char	*ft_replace_absolute(char **spli);
+char	**ft_split_pipe(char const *s, char c);
+int		chkpospip(int i);
+void    ft_augmentpospip(void);
+void	ft_pipe2(int in);
+void	fixwait(int id);
+void	fixechopip(int in, char **spli, int i);
+void	fixwaitexp(int id, char **spli, int i);
 typedef struct s_stock
 {
 	char	**cpenv;
@@ -134,6 +151,12 @@ typedef struct s_stock
 	int		nbpassage;
 	int		nbpip;
 	char	**line2;
+	int		pip[2];
+	int		i;
+	int		chksimpl;
+	int		chkdoubl;
+	int		*chkpospip;
+	int		chks;
 }	t_stock;
 
 t_stock	g_stock;

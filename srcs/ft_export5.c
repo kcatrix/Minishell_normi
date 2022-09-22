@@ -6,7 +6,7 @@
 /*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:46:53 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/05 13:40:04 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/09/16 13:52:10 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,23 @@ char	**ft_exptoenv2_boucle(char **cpcpenv, int i, int y)
 	free(g_stock.cpenv);
 	g_stock.cpenv = malloc(sizeof(char *) * (i + 2));
 	return (cpcpenv);
+}
+
+void	verif_export_exist(int i)
+{
+	if (!g_stock.cpexp)
+	{
+		while (g_stock.cpenv[i])
+			i++;
+		g_stock.cpexp = malloc(sizeof(char *) * (i + 1));
+		i = 0;
+		while (g_stock.cpenv[i])
+		{
+			ft_triexport(g_stock.cpenv[i]);
+			i++;
+		}
+		signal(SIGINT, interrupt_signal);
+		signal(SIGQUIT, quit_signal);
+		signal(11, quit_signal);
+	}
 }

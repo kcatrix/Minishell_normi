@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:16 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/05 13:38:05 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/09/22 02:06:33 by exostiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,15 @@ void	ft_exportadd(int i, char *spli)
 
 void	ft_exportadd_boucle(char **cpcpexp, int i, char *spli, int y)
 {
+	char	*prespli;
+	char	*preexp;
+	
+	
 	while (cpcpexp[i])
 	{
-		if (ft_strcmp(ft_preline(spli), ft_preline(cpcpexp[i])) < 0)
+		prespli = ft_preline(spli);
+		preexp = ft_preline(cpcpexp[i]);
+		if (ft_strcmp(prespli, preexp) < 0) //free preline
 		{
 			g_stock.cpexp[i] = ft_mallocex(spli, g_stock.cpexp[i]);
 			y = i;
@@ -83,14 +89,18 @@ void	ft_exportadd_boucle(char **cpcpexp, int i, char *spli, int y)
 			while (cpcpexp[y])
 			{
 				g_stock.cpexp[i] = ft_mallocex(cpcpexp[y], g_stock.cpexp[i]);
-				free(cpcpexp[y]);
+				free_protect(cpcpexp[y]);
 				y++;
 				i++;
 			}
 			g_stock.cpexp[i] = NULL;
+			free(prespli);
+			free(preexp);
 			free(cpcpexp);
 			return ;
 		}
+		free(prespli);
+		free(preexp);
 		g_stock.cpexp[i] = ft_mallocex(cpcpexp[i], g_stock.cpexp[i]);
 		free(cpcpexp[i]);
 		i++;
