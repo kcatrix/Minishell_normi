@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:18:41 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/22 01:49:41 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/10/05 11:27:14 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void	cmd_cd_boucle(char **unparun)
 	}
 }
 
-void free_protect(char *str)
+void	free_protect(char *str)
 {
-    if (str)
-        free(str);
+	if (str)
+		free(str);
 }
 
 void	ft_pipe2(int in)

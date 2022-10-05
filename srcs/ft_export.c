@@ -6,7 +6,7 @@
 /*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:16 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/22 02:06:33 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/23 02:07:09 by exostiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,35 +68,22 @@ void	ft_exportadd(int i, char *spli)
 		return ;
 	cpcpexp = ft_mallocexportadd();
 	ft_exptoenv(spli);
-	ft_exportadd_boucle(cpcpexp, i, spli, y);
+	ft_exportadd_boucle(cpcpexp, i, spli);
 }
 
-void	ft_exportadd_boucle(char **cpcpexp, int i, char *spli, int y)
+void	ft_exportadd_boucle(char **cpcpexp, int i, char *spli)
 {
 	char	*prespli;
 	char	*preexp;
-	
-	
+
 	while (cpcpexp[i])
 	{
 		prespli = ft_preline(spli);
 		preexp = ft_preline(cpcpexp[i]);
-		if (ft_strcmp(prespli, preexp) < 0) //free preline
+		if (ft_strcmp(prespli, preexp) < 0)
 		{
 			g_stock.cpexp[i] = ft_mallocex(spli, g_stock.cpexp[i]);
-			y = i;
-			i++;
-			while (cpcpexp[y])
-			{
-				g_stock.cpexp[i] = ft_mallocex(cpcpexp[y], g_stock.cpexp[i]);
-				free_protect(cpcpexp[y]);
-				y++;
-				i++;
-			}
-			g_stock.cpexp[i] = NULL;
-			free(prespli);
-			free(preexp);
-			free(cpcpexp);
+			ft_exportadd_boucle2(cpcpexp, prespli, preexp, i);
 			return ;
 		}
 		free(prespli);

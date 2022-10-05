@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export4.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:21:16 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/19 08:14:35 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/29 12:21:22 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_verifenv(char *spli) //fonction modifee
+int	ft_verifenv(char *spli)
 {
 	char	*prespli;
 	char	*preenv;
-	char	*preexp;
 	int		i;
 
 	prespli = ft_preline(spli);
@@ -24,24 +23,11 @@ int	ft_verifenv(char *spli) //fonction modifee
 	while (g_stock.cpenv[i])
 	{
 		preenv = ft_preline(g_stock.cpenv[i]);
-		if (ft_strcmp(prespli, preenv) == 0)//preline à fix
+		if (ft_strcmp(prespli, preenv) == 0)
 		{
 			free(g_stock.cpenv[i]);
 			g_stock.cpenv[i] = ft_mallocex(spli, g_stock.cpenv[i]);
-			i = 0;
-			while (g_stock.cpexp[i])
-			{
-				preexp = ft_preline(g_stock.cpexp[i]);
-				if (ft_strcmp(prespli, preexp) == 0 && ft_verifspli(spli) != 0)
-				{
-					free(g_stock.cpexp[i]);
-					g_stock.cpexp[i] = ft_mallocex(spli, g_stock.cpexp[i]);
-				}
-				free(preexp);
-				i++;
-			}
-			free(preenv);
-			free(prespli);
+			ft_verifenv2(preenv, prespli, spli);
 			return (1);
 		}
 		free(preenv);
@@ -100,7 +86,6 @@ char	**ft_mallocexportadd(void)
 		i++;
 	cpcpenv = malloc(sizeof(char *) * (i + 1));
 	i = 0;
-	printf("1bis\n");
 	cpcpenv = ft_mallocexportadd_boucle(cpcpenv, i, y);
 	return (cpcpenv);
 }

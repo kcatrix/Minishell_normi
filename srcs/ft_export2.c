@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:03:32 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/22 02:55:37 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/29 12:21:18 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	ft_export(char **spli)
 {
-	int in;
-	int id;
+	int	in;
+	int	id;
 	int	i;
 
 	i = 0;
 	pipe(g_stock.pip);
 	in = g_stock.pip[0];
 	id = fork();
-	if(id == 0 && !spli[1])
+	if (id == 0 && !spli[1])
 	{
 		ft_pipe2(in);
 		if (!spli[1])
@@ -45,13 +45,13 @@ void	ft_exptoenv(char *spli)
 	while (cpcpenv[i])
 	{
 		g_stock.cpenv[i] = ft_mallocex(cpcpenv[i], g_stock.cpenv[i]);
-		if(cpcpenv[i])
+		if (cpcpenv[i])
 			free(cpcpenv[i]);
 		i++;
 	}
 	g_stock.cpenv[i] = ft_mallocex(spli, g_stock.cpenv[i]);
 	g_stock.cpenv[i + 1] = NULL;
-	if(cpcpenv)
+	if (cpcpenv)
 		free(cpcpenv);
 	return ;
 }
@@ -84,7 +84,7 @@ int	ft_verifdoublon(char *spli)
 	int		i;
 	char	*prespli;
 	char	*preexp;
-	
+
 	i = 0;
 	while (g_stock.cpexp[i])
 	{
@@ -92,7 +92,6 @@ int	ft_verifdoublon(char *spli)
 		preexp = ft_preline(g_stock.cpexp[i]);
 		if (strcmp(prespli, preexp) == 0)
 		{
-			printf("doublon\n");
 			if (ft_verifspli(spli) != 0)
 				g_stock.cpexp[i] = ft_mallocex(spli, g_stock.cpexp[i]);
 			free(prespli);
@@ -103,7 +102,6 @@ int	ft_verifdoublon(char *spli)
 		free(preexp);
 		i++;
 	}
-	printf("doublonno\n");
 	return (1);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:48:32 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/21 12:35:57 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/10/04 14:10:54 by kcatrix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	ft_exec(char **spli, char **path, char **env, int i)
 	}
 	else
 	{
+		g_stock.fork = id;
 		waitpid(id, 0, 0);
 		close(g_stock.pip[1]);
 		if (g_stock.out > 1)
@@ -91,7 +92,7 @@ void	ft_exec(char **spli, char **path, char **env, int i)
 
 void	init_var_cmd(char *line)
 {
-	int i;
+	int	i;
 	int	y;
 
 	y = 0;
@@ -99,34 +100,13 @@ void	init_var_cmd(char *line)
 	g_stock.chkcrash = 0;
 	g_stock.in = 0;
 	g_stock.out = 1;
+	if (line)
+		line = arn_creat(line, i, y);
 	g_stock.chks = 0;
-	g_stock.line2 = ft_split_pipe(line, '|');
-	if(g_stock.chkpospip)
+	if (line)
+		g_stock.line2 = ft_split_pipe(line, '|');
+	if (g_stock.chkpospip)
 		free(g_stock.chkpospip);
-}
-
-char	*ft_replace_absolute(char **spli) //fix path absolu
-{
-	int 	x;
-	int		y;
-	int		i;
-	char	*tmp;
-
-	tmp = NULL;
-	
-	i = 0;
-	y = 0;
-	x = access(spli[0], R_OK);
-	if(x == 0)
-	{
-		while(spli[0][i])
-			i++;
-		while(spli[0][i--] != '/')
-			y++;
-		tmp = ft_mallocex(spli[0] + i + 2, tmp);
-		free(spli[0]);
-	}
-	return(tmp);
 }
 
 int	ft_parse_cmd(char **spli, char **path)

@@ -6,7 +6,7 @@
 /*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:14:19 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/22 02:57:15 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/22 06:56:15 by exostiv          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,6 @@ int	verifline(char *line)
 	return (1);
 }
 
-/*void	ft_recup_export()
-{
-	recuperer le export
-}*/
-
 void	ft_env(void)
 {
 	int	i;
@@ -38,7 +33,7 @@ void	ft_env(void)
 	int	in;
 
 	i = 0;
-	pipe(g_stock.pip); //fix en mettant 2 cas, si pipes présents et si non pipes
+	pipe(g_stock.pip);
 	in = g_stock.pip[0];
 	id = fork();
 	if (id == 0)
