@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_and_echo3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 16:03:28 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/28 14:08:07 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/12 14:54:06 by kcatrix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,12 @@
 
 void	cmd_cd_dot_dot(void)
 {
-	int	i;
-
-	i = 0;
 	if (ft_verifdirexist() == 1)
+	{
 		ft_modifdirdotdot();
-	if (chdir("..") == -1)
 		return ;
-	while (g_stock.cpenv[i])
-	{
-		if (ft_memcmp(g_stock.cpenv[i], "OLDPWD=", 7) == 0 && g_stock.old == 0)
-		{
-			free(g_stock.cpenv[i]);
-			g_stock.cpenv[i] = "OLDPWD=";
-			g_stock.cpenv[i] = ft_strjoin(g_stock.cpenv[i], getpwd());
-		}
-		i++;
 	}
-	i = 0;
-	while (g_stock.cpenv[i])
-	{
-		if (ft_memcmp(g_stock.cpenv[i], "PWD=", 4) == 0)
-			g_stock.cpenv[i] = ft_chk_last_path(g_stock.cpenv[i]);
-		i++;
-	}
+	cmd_cd_dot_dot_fct();
 }
 
 char	*ft_chk_last_path(char *pwd)

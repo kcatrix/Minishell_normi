@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 13:57:59 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/10/12 13:25:08 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/12 14:53:27 by kcatrix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ int		ft_errorchev(char *str);
 char	*fixchev(char *line);
 char	*ft_strjoin_spe2(char *s1, char *s2, char *c, size_t lenb);
 void	ft_getchevquo(char **spli);
+void	cmd_cd_dot_dot_fct(void);
 
 typedef struct s_stock
 {
