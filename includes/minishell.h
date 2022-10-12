@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 13:57:59 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/10/05 14:36:17 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/12 11:11:23 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,11 @@ char	*verif_pipe_end(char *line);
 int		verif_tmp(char *tmp);
 char	*verif_pipe_end2(char *line, int i, char *tmp);
 void	ft_main_end(char *line);
+char	*ft_strjoin_spe(char *s1, char *s2);
+char	*ft_strjoin_spli(char **spli);
+void	free_spli_protect(char **spli);
+int		pos_dollard(char **spli);
+int		cote_simple(char **spli);
 
 void	verif_chev2bis2(void);
 char	*verif_chev(char *str);
@@ -175,6 +180,7 @@ char	*verif_chev3(char *str, char *tmp, int i, int j);
 char	*verif_chev3bis(char *str, char *tmp, int i, int j);
 int		ft_errorchev(char *str);
 char	*fixchev(char *line);
+char	*ft_strjoin_spe2(char *s1, char *s2, char *c, size_t lenb);
 
 typedef struct s_stock
 {

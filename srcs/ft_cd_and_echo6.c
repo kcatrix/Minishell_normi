@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_and_echo6.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 12:25:46 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/27 13:02:30 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/10/10 13:25:44 by kcatrix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	*ft_replace_existe_val(char *spli, int y, int i, int z)
 	}
 	if (tmp[i - 1] == '"')
 		tmp[i - 1] = '\0';
+	printf("replace exist val\n");
 	tmp = ft_replace_existe_val_boucle(tmp);
 	spli = ft_replace_existe_val_end(spli, y, i, tmp);
 	free_protect(tmp);
@@ -43,6 +44,7 @@ char	*ft_replace_existe_val_boucle(char *tmp)
 			&& (g_stock.cpenv[i][ft_strlen(tmp) - 1] == '='))
 		{
 			free_protect(tmp);
+			printf("stock = %s\n", (g_stock.cpenv[i] + ft_strlen(tmp)));
 			tmp = ft_mallocex(g_stock.cpenv[i]
 					+ ft_strlen(tmp), tmp);
 		}

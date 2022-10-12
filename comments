@@ -1,12 +1,10 @@
-fix chevrons > <  >> << en debut de ligne // + fix les bugs espaces chevrons a faire
+fix chevrons > <  >> << en debut de ligne
 
-Fix unset qui cree du vide a faire ?
+Fix unset qui cree du vide
 
-fix quotes a faire
+fix quotes
 
-fix signaux a faire
-
-fix exit //
+fix exit
 
 
 Min = push minishell

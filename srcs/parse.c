@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:45:21 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/29 12:13:35 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/12 10:05:49 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	**ft_sup_dollar_boucle(char **spli, char **spli2, int y, int i)
 		free(spli[i]);
 		i++;
 	}
+	spli2[i] = NULL;
 	return (spli2);
 }
 
@@ -63,7 +64,7 @@ void	del_quote(char *cmd)
 			|| (cmd[i] == '\'' && cmd[i - 1] != '\\'))
 		{
 			quote = cmd[i];
-			rm_char(cmd, i++);
+			rm_char(cmd, i);
 			while (cmd[i] != quote)
 			{
 				if (cmd[i] == '\\')

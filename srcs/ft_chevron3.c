@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 16:12:26 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/29 12:13:07 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/12 11:31:43 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ int	ft_chevron_gauche(char **spli, int i, int y)
 	int	file;
 
 	file = open(spli[i + 1], O_WRONLY, 0777);
+	g_stock.in = file;
 	if (file < 0)
 	{
 		close(y);
 		g_stock.chkcrash = -1;
-		printf("%s: No such file or directory\n", spli[i + 1]);
+		printf("%s:  file or directory\n", spli[i + 1]);
 	}
 	del_i(spli, i);
 	return (file);
@@ -78,11 +79,11 @@ int	ft_chevron_exist(char **spli)
 	{
 		if ((spli[i][0] == '>' && spli[i][1] == '\0') || ((spli[i][0] == '>'
 			&& spli[i][1] == '>') && spli[i][2] == '\0'))
-			return (1);
+			return (i);
 		if ((spli[i][0] == '<' && spli[i][1] == '\0') || ((spli[i][0] == '<'
 			&& spli[i][1] == '<') && spli[i][2] == '\0'))
-			return (2);
+			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }

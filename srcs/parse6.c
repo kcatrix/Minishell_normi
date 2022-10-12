@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 12:56:45 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/10/05 14:36:10 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/12 11:23:39 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ int	ft_errorchev(char *str)
 
 char	*fixchev(char *line)
 {
-	printf("bash: syntax error near unexpected token `%s'\n", g_stock.chev);
+	if (line[0] != '\0')
+		printf("bash: syntax error near unexpected token `%s'\n", g_stock.chev);
 	free(line);
 	return (" ");
 }

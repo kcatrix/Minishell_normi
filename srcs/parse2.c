@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:26:09 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/27 12:24:36 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/10/12 10:57:46 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	**parse(char **spli)
 	i = 0;
 	if (spli[0][0] == '/')
 		spli[0] = ft_replace_absolute(spli);
+	if (cote_simple(spli) == 0)
+		return (spli);
 	while (ft_checkdollar(spli) == 1)
 	{
 		while (spli[i])
@@ -36,6 +38,20 @@ char	**parse(char **spli)
 	i = 0;
 	spli = ft_checkdollar_inside(spli);
 	return (spli);
+}
+
+int	cote_simple(char **spli)
+{
+	int	i;
+
+	i = 0;
+	while (spli[i])
+	{
+		if (spli[i][0] == '\'')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 int	ft_checkdollar(char **spli)
@@ -67,10 +83,16 @@ int	verif_space(char *line)
 
 char	**cmd_dollar(char **spli, int y)
 {
-	int	i;
+	int		i;
+	char	*tmp;
 
 	i = 0;
-	del_quote(spli[y]);
+	tmp = ft_strjoin_spli(spli);
+	free_spli(spli);
+	del_quote(tmp);
+	spli = ft_split(tmp, ' ');
+	free(tmp);
+	y = pos_dollard(spli);
 	while (g_stock.cpenv[i])
 	{
 		if (ft_memcmp(g_stock.cpenv[i],
@@ -86,21 +108,4 @@ char	**cmd_dollar(char **spli, int y)
 	}
 	spli = ft_sup_dollar(spli, y);
 	return (spli);
-}
-
-void	remove_backslash(char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '"')
-			skip(str, &i);
-		if (str[i] == '\'')
-			skip(str, &i);
-		if (str[i] == '\\')
-			rm_char(str, i--);
-		i++;
-	}
 }

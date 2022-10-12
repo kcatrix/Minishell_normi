@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 09:51:13 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/10/05 14:31:27 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/12 11:48:40 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*verif_chev(char *str)
 	int		i;
 	int		j;
 
+	if (str[0] == '\0')
+		return (0);
 	tmp = NULL;
 	j = 0;
 	i = 0;

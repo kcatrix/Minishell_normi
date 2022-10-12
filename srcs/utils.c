@@ -1,32 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cmd4.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 13:30:01 by kevyn             #+#    #+#             */
-/*   Updated: 2022/10/12 11:36:20 by tnicoue          ###   ########.fr       */
+/*   Created: 2022/10/12 10:40:20 by tnicoue           #+#    #+#             */
+/*   Updated: 2022/10/12 10:50:05 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	child_process(char **path, char **spli, char **env, int in)
+char	*ft_strjoin_spe2(char *s1, char *s2, char *c, size_t lenb)
 {
-	if (g_stock.nbpip == 0
-		|| (g_stock.nbpip > 0 && g_stock.nbpassage == g_stock.nbpip + 1))
+	size_t	y;
+	size_t	i;
+	size_t	j;
+	size_t	lena;
+
+	lena = strlen(s1);
+	i = 0;
+	j = 0 - lena;
+	y = 0;
+	while (i < lena + (lenb + 1))
 	{
-		dup2(g_stock.out, STDOUT_FILENO);
-		dup2(g_stock.in, STDIN_FILENO);
+		if (i == lena)
+		{
+			c[i] = 32;
+			i++;
+		}
+		c[i] = s1[y];
+		if (i >= lena)
+			c[i] = s2[j];
+		y++;
+		j++;
+		i++;
 	}
-	if (g_stock.pip[0] && g_stock.nbpassage != 1)
-	{
-		if (g_stock.in != 0)
-			dup2(g_stock.in, STDIN_FILENO);
-		else
-			dup2(in, STDIN_FILENO);
-	}
-	ft_pipe();
-	execve(path[g_stock.i], spli, env);
+	c[i] = '\0';
+	return (c);
 }

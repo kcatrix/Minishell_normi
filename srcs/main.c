@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:50 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/10/05 14:00:07 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/12 11:49:08 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	prechauffage(char **env)
 	int	i;
 
 	i = 0;
-	g_stock.chev = NULL;
 	g_stock.cpenv = ft_cp_env(env);
 	verif_export_exist(i);
 	set_signal(0);

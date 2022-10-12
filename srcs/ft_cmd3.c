@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:48:32 by kevyn             #+#    #+#             */
-/*   Updated: 2022/10/04 14:10:54 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/10/12 11:37:32 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ int	ft_parse_cmd(char **spli, char **path)
 	}
 	if (path == NULL)
 	{
+		g_stock.end = 1;
 		printf("%s: No such file or directory\n", spli[0]);
 		return (0);
 	}

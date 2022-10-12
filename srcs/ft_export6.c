@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:09:03 by exostiv           #+#    #+#             */
-/*   Updated: 2022/10/05 12:37:29 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/12 12:21:55 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,9 @@ int	ft_cmd_suite(char **spli, char **path, char **env)
 	ft_verif_chevron(spli);
 	if (ft_parse_cmd(spli, path) == 0)
 	{
-		if (spli)
-			free_spli(spli);
+		i = 0;
+		if (spli && spli[0][0])
+			free_spli_protect(spli);
 		return (0);
 	}
 	i = verif_exist(path, spli[0]);
