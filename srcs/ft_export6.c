@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:09:03 by exostiv           #+#    #+#             */
-/*   Updated: 2022/10/12 12:21:55 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/12 13:06:38 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,16 @@ int	ft_cmd_suite(char **spli, char **path, char **env)
 
 	i = 0;
 	ft_verif_chevron(spli);
+	if (spli[0] == '\0')
+	{
+		free_spli(spli);
+		free_spli(path);
+		return (0);
+	}
 	if (ft_parse_cmd(spli, path) == 0)
 	{
 		i = 0;
-		if (spli && spli[0][0])
+		if (spli && spli[0])
 			free_spli_protect(spli);
 		return (0);
 	}

@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:03:11 by kevyn             #+#    #+#             */
-/*   Updated: 2022/10/12 11:50:06 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/12 13:02:52 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	ft_chevron_redirect2(char **spli, int i)
 	}
 	else
 		g_stock.in = heredoc(spli, i);
+	if (spli[0] == '\0')
+		return (0);
 	y = ft_chevron_redirect2_boucle(spli, i, y);
 	if (y == -1)
 		return (-1);
@@ -56,8 +58,9 @@ int	ft_chevron_redirect2(char **spli, int i)
 
 int	ft_chevron_redirect2_boucle(char **spli, int i, int y)
 {
-	while (ft_chevron_exist(spli) != -1)
+	while (spli[i] && ft_chevron_exist(spli) != -1)
 	{
+		i = ft_chevron_exist(spli);
 		while (spli[i] && spli[i][0] == '>' && spli[i][1] == '\0')
 		{	
 			close(y);

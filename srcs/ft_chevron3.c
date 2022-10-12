@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 16:12:26 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/10/12 11:31:43 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/12 12:55:04 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_chevron_gauche(char **spli, int i, int y)
 	{
 		close(y);
 		g_stock.chkcrash = -1;
-		printf("%s:  file or directory\n", spli[i + 1]);
+		printf("%s:  No such file or directory\n", spli[i + 1]);
 	}
 	del_i(spli, i);
 	return (file);
