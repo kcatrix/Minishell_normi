@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 14:38:26 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/10/12 11:21:17 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/12 16:09:20 by kcatrix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*verif_pipe_end(char *line)
 	}
 	if (verif_pipe(line) == 0)
 	{
-		printf("bash: syntax error near unexpected token `|'\n");
+		printf("minishell: syntax error near unexpected token `|'\n");
 		free(line);
 		return (" ");
 	}

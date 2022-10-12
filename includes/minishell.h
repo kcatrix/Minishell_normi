@@ -6,7 +6,7 @@
 /*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 13:57:59 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/10/12 14:53:27 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/10/12 15:45:38 by kcatrix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ char	*fixchev(char *line);
 char	*ft_strjoin_spe2(char *s1, char *s2, char *c, size_t lenb);
 void	ft_getchevquo(char **spli);
 void	cmd_cd_dot_dot_fct(void);
+int		voi_line(char *line);
 
 typedef struct s_stock
 {

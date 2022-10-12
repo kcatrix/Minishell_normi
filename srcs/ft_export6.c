@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export6.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:09:03 by exostiv           #+#    #+#             */
-/*   Updated: 2022/10/12 13:06:38 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/12 16:08:45 by kcatrix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,21 @@ int	ft_cmd_suite(char **spli, char **path, char **env)
 	ft_exec(spli, path, env, i);
 	g_stock.end = 0;
 	return (0);
+}
+
+int	voi_line(char *line)
+{
+	if (line[0] == '"' && line[1] == '"' && line[2] == '\0')
+	{
+		printf("minishell: : command not found\n");
+		free(line);
+		return (0);
+	}
+	if (line[0] == '\'' && line[1] == '\'' && line[2] == '\0')
+	{
+		printf("minishell: : command not found\n");
+		free(line);
+		return (0);
+	}
+	return (1);
 }
