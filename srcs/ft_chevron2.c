@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:03:11 by kevyn             #+#    #+#             */
-/*   Updated: 2022/10/12 13:02:52 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/12 13:56:03 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	ft_chevron_redirect2_boucle(char **spli, int i, int y)
 {
 	while (spli[i] && ft_chevron_exist(spli) != -1)
 	{
+		printf("i = %d\n", i);
 		i = ft_chevron_exist(spli);
 		while (spli[i] && spli[i][0] == '>' && spli[i][1] == '\0')
 		{	

@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 16:12:26 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/10/12 12:55:04 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/12 14:10:31 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,13 @@ int	ft_chevron_exist(char **spli)
 	i = 0;
 	while (spli[i])
 	{
-		if ((spli[i][0] == '>' && spli[i][1] == '\0') || ((spli[i][0] == '>'
-			&& spli[i][1] == '>') && spli[i][2] == '\0'))
+		if ((((spli[i][0] == '>' && spli[i][1] == '\0') || ((spli[i][0] == '>'
+				&& spli[i][1] == '>') && spli[i][2] == '\0'))
+					&& i < g_stock.debquot && i > g_stock.finquot))
 			return (i);
-		if ((spli[i][0] == '<' && spli[i][1] == '\0') || ((spli[i][0] == '<'
-			&& spli[i][1] == '<') && spli[i][2] == '\0'))
+		if ((((spli[i][0] == '<' && spli[i][1] == '\0') || ((spli[i][0] == '<'
+				&& spli[i][1] == '<') && spli[i][2] == '\0'))
+					&& i < g_stock.debquot && i > g_stock.finquot))
 			return (i);
 		i++;
 	}

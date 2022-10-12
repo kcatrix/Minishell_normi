@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:49:32 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/10/12 12:48:18 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/12 14:43:14 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,16 @@ int	ft_verif_chevron(char **spli)
 	i = 0;
 	while (spli[i])
 	{
-		if ((spli[i][0] == '>' && spli[i][1] == '\0')
-			|| ((spli[i][0] == '>' && spli[i][1] == '>') && spli[i][2] == '\0'))
+		if (((spli[i][0] == '>' && spli[i][1] == '\0')
+			|| (spli[i][0] == '>' && spli[i][1] == '>')) && spli[i][2] == '\0'
+			&& i < g_stock.debquot && i > g_stock.finquot)
 		{
 			ft_chevron_redirect(spli, i);
 			return (0);
 		}
-		if ((spli[i][0] == '<' && spli[i][1] == '\0')
-			|| ((spli[i][0] == '<' && spli[i][1] == '<') && spli[i][2] == '\0'))
+		if (((spli[i][0] == '<' && spli[i][1] == '\0')
+			|| (spli[i][0] == '<' && spli[i][1] == '<')) && spli[i][2] == '\0'
+			&& i < g_stock.debquot && i > g_stock.finquot)
 		{
 			ft_chevron_redirect2(spli, i);
 			return (0);
@@ -51,7 +53,7 @@ int	ft_chevron_redirect(char **spli, int i)
 
 int	ft_chevron_redirect_boucle(char **spli, int i, int y)
 {
-	while (ft_chevron_exist(spli) != -1)
+	while (spli && ft_chevron_exist(spli) != -1)
 	{
 		i = ft_chevron_exist(spli);
 		while (spli[i] && spli[i][0] == '>' && spli[i][1] == '\0')

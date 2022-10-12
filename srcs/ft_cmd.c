@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/10/12 12:21:05 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/12 14:09:59 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int	ft_cmd(char *line, char **env)
 {
 	char	**path;
 	char	**spli;
+	char	**spli2;
 	int		i;
 
 	i = 0;
@@ -121,6 +122,9 @@ int	ft_cmd(char *line, char **env)
 	if (verif_space(g_stock.line2[g_stock.nbpassage])
 		== 0 || g_stock.line2[g_stock.nbpassage] == 0)
 		return (0);
+	spli2 = ft_split(g_stock.line2[g_stock.nbpassage], ' ');
+	ft_getchevquo(spli2);
+	free(spli2);
 	if (ft_strncmp(g_stock.line2[g_stock.nbpassage], "echo", 4) != 0)
 		del_quote(g_stock.line2[g_stock.nbpassage]);
 	path = path_fct(g_stock.cpenv);

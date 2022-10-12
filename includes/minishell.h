@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 13:57:59 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/10/12 11:11:23 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/12 13:25:08 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ char	*verif_chev3bis(char *str, char *tmp, int i, int j);
 int		ft_errorchev(char *str);
 char	*fixchev(char *line);
 char	*ft_strjoin_spe2(char *s1, char *s2, char *c, size_t lenb);
+void	ft_getchevquo(char **spli);
 
 typedef struct s_stock
 {
@@ -214,6 +215,8 @@ typedef struct s_stock
 	char	*chev;
 	int		chevquote;
 	int		lastposchev;
+	int		debquot;
+	int		finquot;
 }	t_stock;
 
 t_stock	g_stock;
