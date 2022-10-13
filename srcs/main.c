@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:50 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/10/12 15:56:40 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/10/13 15:25:41 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ void	prechauffage(char **env)
 	i = 0;
 	g_stock.cpenv = ft_cp_env(env);
 	verif_export_exist(i);
+	signal(SIGINT, interrupt_signal);
+	signal(SIGQUIT, quit_signal);
+	signal(11, quit_signal);
 	set_signal(0);
 	g_stock.nbpip = 0;
 	g_stock.fork = 0;

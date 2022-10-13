@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:45:21 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/10/12 10:05:49 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/13 14:31:46 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,21 @@ char	**ft_sup_dollar_boucle(char **spli, char **spli2, int y, int i)
 	{
 		if (i == y)
 		{
-			free(spli[y++]);
+			y++;
 			while (spli[y])
 			{
 				spli2[y - 1] = ft_mallocex(spli[y], spli2[y - 1]);
-				free(spli[y]);
 				y++;
 			}
 			spli2[y - 1] = NULL;
-			free(spli);
+			free_spli(spli);
 			return (spli2);
 		}
 		spli2[i] = ft_mallocex(spli[i], spli2[i]);
-		free(spli[i]);
 		i++;
 	}
 	spli2[i] = NULL;
+	free_spli(spli);
 	return (spli2);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/10/12 16:02:35 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/10/13 15:49:55 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,21 +111,22 @@ int	ft_cmd(char *line, char **env)
 {
 	char	**path;
 	char	**spli;
-	char	**spli2;
 	int		i;
-	
+
 	i = 0;
 	g_stock.vid = 0;
 	init_var_cmd(line);
-	
 	if (!line || !ft_strlen(line) || voi_line(line) == 0)
 		return (0);
 	if (verif_space(g_stock.line2[g_stock.nbpassage])
 		== 0 || g_stock.line2[g_stock.nbpassage] == 0)
 		return (0);
-	spli2 = ft_split(g_stock.line2[g_stock.nbpassage], ' ');
-	ft_getchevquo(spli2);
-	free_spli(spli2);
+	if(chevinq(g_stock.line2[g_stock.nbpassage]) == 0)
+	{
+		if(g_stock.test)
+			free_spli(g_stock.test);
+		quotestate();
+	}
 	if (ft_strncmp(g_stock.line2[g_stock.nbpassage], "echo", 4) != 0)
 		del_quote(g_stock.line2[g_stock.nbpassage]);
 	path = path_fct(g_stock.cpenv);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export5.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 12:46:53 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/16 13:52:10 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/10/13 12:42:15 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,5 @@ void	verif_export_exist(int i)
 			ft_triexport(g_stock.cpenv[i]);
 			i++;
 		}
-		signal(SIGINT, interrupt_signal);
-		signal(SIGQUIT, quit_signal);
-		signal(11, quit_signal);
 	}
 }

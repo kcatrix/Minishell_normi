@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 14:38:26 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/10/12 16:09:20 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/10/13 14:54:55 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,17 @@ int	verif_pipe(char *line)
 	int	i;
 
 	i = 0;
-	while ((line[i] == 32) || (line[i] >= 9 && line[i] <= 13))
-		i++;
 	if (line[i] == '|')
 		return (0);
+	while (line[i])
+	{
+		if (line[i] == '|')
+		{
+			if (verif_pipe2(line + i + 1) == 0)
+				return (0);
+		}
+		i++;
+	}
 	return (1);
 }
 

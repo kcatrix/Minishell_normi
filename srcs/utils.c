@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 10:40:20 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/10/12 13:30:20 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/13 15:49:50 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,64 @@ void	ft_getchevquo(char **spli)
 		y = 0;
 		i++;
 	}
+}
+
+int	verif_pipe2(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (((line[i] == 32) || (line[i] >= 9 && line[i] <= 13)))
+		i++;
+	if (line[i] == '|' && i > 0)
+		return (0);
+	return (1);
+}
+
+void	quotestate(void)
+{
+	g_stock.test = ft_split(g_stock.line2[g_stock.nbpassage], ' ');
+	ft_getchevquo(g_stock.test);
+}
+
+void	fixfin(void)
+{
+	int	i;
+	int	y;
+
+	y = 0;
+	i = 0;
+	g_stock.test = malloc(sizeof(char *) * 100);
+	while (g_stock.test[i])
+	{
+		g_stock.test[i] = ft_strdup("");
+		free(g_stock.test[i]);
+		i++;
+	}
+}
+
+int	chevinq(char *line)
+{
+	int	i;
+	int	w;
+
+	w = 0;
+	i = 0;
+	while(line[i])
+	{
+		if ((line[i] == '"' || line[i] == '\'') && w == 0)
+		{
+			w++;
+			i++;
+		}
+		if ((line[i] == '"' || line[i] == '\'') && w == 1)
+		{
+			w--;
+			i++;
+		}
+		if ((line[i] == '>' || line[i] == '<') && w == 1)
+			return(0);
+		i++;
+	}
+	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse6.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 12:56:45 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/10/12 16:09:41 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/10/13 11:17:40 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ int	ft_errorchev(char *str)
 char	*fixchev(char *line)
 {
 	if (line[0] != '\0')
-		printf("minishell: syntax error near unexpected token `%s'\n", g_stock.chev);
+		printf("minishell: syntax error near unexpected token `%s'\n",
+			g_stock.chev);
 	free(line);
 	return (" ");
 }

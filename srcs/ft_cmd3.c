@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:48:32 by kevyn             #+#    #+#             */
-/*   Updated: 2022/10/12 13:52:25 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/13 15:32:45 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	init_var_cmd(char *line)
 
 	y = 0;
 	i = 0;
-	g_stock.debquot = 100;
+	g_stock.debquot = 200;
 	g_stock.finquot = -200;
 	g_stock.chkcrash = 0;
 	g_stock.in = 0;

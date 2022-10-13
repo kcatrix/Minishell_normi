@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export6.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 08:09:03 by exostiv           #+#    #+#             */
-/*   Updated: 2022/10/12 16:08:45 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/10/13 14:29:31 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ int	ft_cmd_suite(char **spli, char **path, char **env)
 	ft_verif_chevron(spli);
 	if (spli[0] == '\0')
 	{
-		free_spli(spli);
-		free_spli(path);
+		free_spli_protect(spli);
+		free_spli_protect(path);
 		return (0);
 	}
 	if (ft_parse_cmd(spli, path) == 0)

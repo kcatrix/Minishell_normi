@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 10:56:15 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/22 07:50:15 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/10/13 13:40:55 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ char	**path_fct(char **env)
 	int		i;
 	int		y;
 	char	*str;
-	char	**spli;
 
 	i = 0;
 	y = 0;
@@ -32,8 +31,7 @@ char	**path_fct(char **env)
 	while (env[i][y] != '=')
 		y++;
 	str = env[i] + y + 1;
-	spli = ft_split(str, ':');
-	return (path_finish(spli));
+	return (path_finish(ft_split(str, ':')));
 }
 
 char	**path_finish(char **env)

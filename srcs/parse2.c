@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:26:09 by kevyn             #+#    #+#             */
-/*   Updated: 2022/10/12 10:57:46 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/13 13:44:10 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	**parse(char **spli)
 	int	i;
 
 	i = 0;
-	if (spli[0][0] == '/')
+	if (spli && spli[0][0] == '/')
 		spli[0] = ft_replace_absolute(spli);
 	if (cote_simple(spli) == 0)
 		return (spli);
