@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 10:40:20 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/10/13 15:49:50 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/13 15:59:11 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ int	verif_pipe2(char *line)
 
 void	quotestate(void)
 {
+	if (g_stock.test)
+		free_spli(g_stock.test);
 	g_stock.test = ft_split(g_stock.line2[g_stock.nbpassage], ' ');
 	ft_getchevquo(g_stock.test);
 }
@@ -102,30 +104,4 @@ void	fixfin(void)
 		free(g_stock.test[i]);
 		i++;
 	}
-}
-
-int	chevinq(char *line)
-{
-	int	i;
-	int	w;
-
-	w = 0;
-	i = 0;
-	while(line[i])
-	{
-		if ((line[i] == '"' || line[i] == '\'') && w == 0)
-		{
-			w++;
-			i++;
-		}
-		if ((line[i] == '"' || line[i] == '\'') && w == 1)
-		{
-			w--;
-			i++;
-		}
-		if ((line[i] == '>' || line[i] == '<') && w == 1)
-			return(0);
-		i++;
-	}
-	return (1);
 }

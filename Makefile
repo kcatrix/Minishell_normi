@@ -6,7 +6,7 @@
 #    By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 21:50:04 by tnicoue           #+#    #+#              #
-#    Updated: 2022/10/13 12:38:57 by tnicoue          ###   ########.fr        #
+#    Updated: 2022/10/13 15:58:21 by tnicoue          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS = main.c ft_cmd.c ft_cd_and_echo.c parse.c \
 		ft_cd_and_echo4.c ft_split_pipe.c ft_split_pipe2.c \
 		pipe2.c pipe3.c ft_export6.c ft_cd_end_echo5.c \
 		ft_cd_and_echo6.c ft_cd_and_echo7.c parse4.c \
-		parse5.c parse6.c parse7.c utils.c
+		parse5.c parse6.c parse7.c utils.c utils2.c
 		
 RM = rm -f
 
